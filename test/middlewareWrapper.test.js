@@ -3,10 +3,10 @@ const sinon = require('sinon');
 
 chai.should();
 
-const expresStatusMonitor = require('../src/middleware-wrapper');
-const defaultConfig = require('../src/helpers/default-config');
+const expresStatusMonitor = require('../src/middlewareWrapper');
+const defaultConfig = require('../src/helpers/defaultConfig');
 
-describe('middleware-wrapper', () => {
+describe('middlewareWrapper', () => {
   describe('when initialised', () => {
     const middleware = expresStatusMonitor();
 

@@ -3,9 +3,9 @@ const path = require('path');
 const onHeaders = require('on-headers');
 const Handlebars = require('handlebars');
 const validate = require('./helpers/validate');
-const onHeadersListener = require('./helpers/on-headers-listener');
-const socketIoInit = require('./helpers/socket-io-init');
-const healthChecker = require('./helpers/health-checker');
+const onHeadersListener = require('./helpers/onHeadersListener');
+const socketIoInit = require('./helpers/socketIOInit');
+const healthChecker = require('./helpers/healthChecker');
 
 const middlewareWrapper = config => {
   const validatedConfig = validate(config);

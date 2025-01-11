@@ -3,7 +3,7 @@
 'use strict';
 
 const socketIo = require('socket.io');
-const gatherOsMetrics = require('./gather-os-metrics');
+const gatherOsMetrics = require('./gatherOSMetrics');
 
 let io;
 

@@ -1,7 +1,7 @@
 const pidusage = require('pidusage');
 const os = require('os');
 const v8 = require('v8');
-const sendMetrics = require('./send-metrics');
+const sendMetrics = require('./sendMetrics');
 const debug = require('debug')('express-status-monitor');
 
 let eventLoopStats; // eslint-disable-line

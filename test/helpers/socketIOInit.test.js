@@ -2,10 +2,10 @@ const chai = require('chai');
 
 chai.should();
 
-const socketIoInit = require('../../src/helpers/socket-io-init');
-const defaultConfig = require('../../src/helpers/default-config');
+const socketIoInit = require('../../src/helpers/socketIOInit');
+const defaultConfig = require('../../src/helpers/defaultConfig');
 
-describe('socket-io-init', () => {
+describe('socketIOInit', () => {
   describe('when invoked', () => {
     it('then all spans should have os and responses property', () => {
       const spans = defaultConfig.spans;

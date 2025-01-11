@@ -3,9 +3,9 @@ const sinon = require('sinon');
 
 chai.should();
 
-const sendMetrics = require('../../src/helpers/send-metrics');
+const sendMetrics = require('../../src/helpers/sendMetrics');
 
-describe('send-metrics', () => {
+describe('sendMetrics', () => {
   describe('when invoked', () => {
     it('then io.emit called', () => {
       const io = { emit: sinon.stub() };

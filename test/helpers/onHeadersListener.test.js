@@ -3,10 +3,10 @@ const sinon = require('sinon');
 
 chai.should();
 
-const onHeadersListener = require('../../src/helpers/on-headers-listener');
-const defaultConfig = require('../../src/helpers/default-config');
+const onHeadersListener = require('../../src/helpers/onHeadersListener');
+const defaultConfig = require('../../src/helpers/defaultConfig');
 
-describe('on-headers-listener', () => {
+describe('onHeadersListener', () => {
   describe('when invoked', () => {
     const clock = sinon.useFakeTimers();
     const spans = defaultConfig.spans;

@@ -3,7 +3,7 @@ const chai = require('chai');
 
 chai.should();
 
-const defaultConfig = require('../../src/helpers/default-config');
+const defaultConfig = require('../../src/helpers/defaultConfig');
 const validate = require('../../src/helpers/validate');
 
 describe('validate', () => {
