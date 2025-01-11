@@ -3,7 +3,7 @@
 /**
  * Initializes socket.io with the provided Express server and configuration
  *
- * @module expressStatusMonitor/socketIOInit
+ * @module socketIOInit
  */
 
 const socketIo = require('socket.io');

@@ -3,7 +3,7 @@
 /**
  * Status monitor configuration validation and merging
  *
- * @module expressStatusMonitor/validate
+ * @module validate
  */
 
 const defaultConfig = require('./defaultConfig');

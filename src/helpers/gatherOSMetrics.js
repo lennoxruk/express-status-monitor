@@ -3,7 +3,7 @@
 /**
  * Gathers OS metrics and sends them to the connected clients using socket.io
  *
- * @module expressStatusMonitor/gatherOSMetrics
+ * @module gatherOSMetrics
  */
 
 const pidusage = require('pidusage');

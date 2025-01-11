@@ -1,19 +1,16 @@
-const chai = require('chai');
-const sinon = require('sinon');
-
-chai.should();
+'use strict';
 
 const sendMetrics = require('../../src/helpers/sendMetrics');
 
-describe('sendMetrics', () => {
+describe('send-metrics', () => {
   describe('when invoked', () => {
     it('then io.emit called', () => {
-      const io = { emit: sinon.stub() };
+      const io = { emit: jest.fn() };
       const span = { os: [], responses: [] };
 
       sendMetrics(io, span);
 
-      sinon.assert.calledWith(io.emit, 'esm_stats');
+      expect(io.emit).toBeCalledWith('esm_stats', expect.any(Object));
     });
   });
 });

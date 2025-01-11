@@ -4,7 +4,7 @@
  * Listens for the 'headers' event on an Express request and records the response time
  * and status code category for the request into the provided spans
  *
- * @module expressStatusMonitor/onHeadersListener
+ * @module onHeadersListener
  */
 
 /**

@@ -3,7 +3,7 @@
 /**
  * Sends the OS metrics and response data to the connected clients using socket.io
  *
- * @module expressStatusMonitor/sendMetrics
+ * @module sendMetrics
  */
 
 /**

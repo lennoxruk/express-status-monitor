@@ -1,7 +1,4 @@
-/* eslint-disable no-unused-expressions */
-const chai = require('chai');
-
-chai.should();
+'use strict';
 
 const defaultConfig = require('../../src/helpers/defaultConfig');
 const validate = require('../../src/helpers/validate');
@@ -11,72 +8,84 @@ describe('validate', () => {
     const config = validate();
 
     it(`then title === ${defaultConfig.title}`, () => {
-      config.title.should.equal(defaultConfig.title);
+      expect(config.title).toBe(defaultConfig.title);
     });
 
     it(`then path === ${defaultConfig.path}`, () => {
-      config.path.should.equal(defaultConfig.path);
+      expect(config.path).toBe(defaultConfig.path);
     });
 
     it(`then spans === ${JSON.stringify(defaultConfig.spans)}`, () => {
-      config.spans.should.equal(defaultConfig.spans);
+      expect(config.spans).toEqual(defaultConfig.spans);
     });
 
     it('then port === null', () => {
-      chai.expect(config.port).to.be.null;
+      expect(config.port).toBeNull();
     });
 
     it('then websocket === null', () => {
-      chai.expect(config.websocket).to.be.null;
+      expect(config.websocket).toBeNull();
     });
   });
 
   describe('when config is invalid', () => {
-    const config = validate({ title: true, path: false, spans: 'not-an-array', port: 'abc', websocket: false });
+    const config = validate({
+      title: true,
+      path: false,
+      spans: 'not-an-array',
+      port: 'abc',
+      websocket: false
+    });
 
     it(`then title === ${defaultConfig.title}`, () => {
-      config.title.should.equal(defaultConfig.title);
+      expect(config.title).toBe(defaultConfig.title);
     });
 
     it(`then path === ${defaultConfig.path}`, () => {
-      config.path.should.equal(defaultConfig.path);
+      expect(config.path).toBe(defaultConfig.path);
     });
 
     it(`then spans === ${JSON.stringify(defaultConfig.spans)}`, () => {
-      config.spans.should.equal(defaultConfig.spans);
+      expect(config.spans).toEqual(defaultConfig.spans);
     });
 
     it('then port === null', () => {
-      chai.expect(config.port).to.be.null;
+      expect(config.port).toBeNull();
     });
 
     it('then websocket === null', () => {
-      chai.expect(config.websocket).to.be.null;
+      expect(config.websocket).toBeNull();
     });
   });
 
   describe('when config is valid', () => {
-    const customConfig = { title: 'Custom title', path: '/custom-path', spans: [{}, {}, {}], port: 9999, websocket: {} };
+    const customConfig = {
+      title: 'Custom title',
+      path: '/custom-path',
+      spans: [{}, {}, {}],
+      port: 9999,
+      websocket: {}
+    };
     const config = validate(customConfig);
 
     it(`then title === ${customConfig.title}`, () => {
-      config.title.should.equal(customConfig.title);
+      expect(config.title).toBe(customConfig.title);
     });
 
     it(`then path === ${customConfig.path}`, () => {
-      config.path.should.equal(customConfig.path);
+      expect(config.path).toBe(customConfig.path);
     });
 
     it(`then spans === ${JSON.stringify(customConfig.spans)}`, () => {
-      config.spans.should.equal(customConfig.spans);
+      expect(config.spans).toEqual(customConfig.spans);
     });
 
     it('then websocket === {}', () => {
-      config.websocket.should.deep.equal({});
+      expect(config.websocket).toEqual({});
     });
 
     it(`then port === ${customConfig.port}`, () => {
-      config.port.should.equal(customConfig.port);
+      expect(config.port).toBe(customConfig.port);
     });
   });
 });

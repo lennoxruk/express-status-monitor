@@ -1,27 +1,18 @@
-const chai = require('chai');
-
-chai.should();
+'use strict';
 
 const socketIoInit = require('../../src/helpers/socketIOInit');
 const defaultConfig = require('../../src/helpers/defaultConfig');
 
-describe('socketIOInit', () => {
+describe('socket-io-init', () => {
   describe('when invoked', () => {
     it('then all spans should have os and responses property', () => {
       const spans = defaultConfig.spans;
 
-      spans.forEach((span) => {
-        span.should.not.have.property('os');
-        // info: not working as if it was another test interfering
-        // span.should.not.have.property('responses');
-      });
+      expect(spans.every((span) => !span.os && !span.responses)).toBe(true);
 
       socketIoInit({}, defaultConfig);
 
-      spans.forEach((span) => {
-        span.should.have.property('os');
-        span.should.have.property('responses');
-      });
+      expect(spans.every((span) => span.os && span.responses)).toBe(true);
     });
   });
 });

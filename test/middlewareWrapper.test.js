@@ -1,33 +1,38 @@
-const chai = require('chai');
-const sinon = require('sinon');
+'use strict';
 
-chai.should();
-
-const expresStatusMonitor = require('../src/middlewareWrapper');
+const expressStatusMonitor = require('../src/middlewareWrapper');
 const defaultConfig = require('../src/helpers/defaultConfig');
 
-describe('middlewareWrapper', () => {
+describe('middleware-wrapper', () => {
   describe('when initialised', () => {
-    const middleware = expresStatusMonitor();
+    afterEach(() => {
+      jest.restoreAllMocks();
+    });
 
-    it('then it should be an instance of a Function', () => {
-      middleware.should.be.an.instanceof(Function);
+    const middleware = expressStatusMonitor();
+
+    it('should be an instance of a Function', () => {
+      expect(typeof middleware).toBe('function');
     });
 
     const req = { socket: {} };
-    const res = { send: sinon.stub() };
-    const next = sinon.stub();
+    const res = { send: jest.fn() };
+    const next = jest.fn();
 
     describe('when invoked', () => {
       beforeEach(() => {
         req.path = defaultConfig.path;
-        res.send.reset();
+        res.send.mockReset();
+      });
+
+      afterEach(() => {
+        jest.restoreAllMocks();
       });
 
       it(`and req.path === ${defaultConfig.path}, then res.send called`, (done) => {
         middleware(req, res, next);
         setTimeout(() => {
-          sinon.assert.called(res.send);
+          expect(res.send).toBeCalled();
           done();
         });
       });
@@ -36,43 +41,45 @@ describe('middlewareWrapper', () => {
         req.path = '/another-path';
         middleware(req, res, next);
         setTimeout(() => {
-          sinon.assert.notCalled(res.send);
+          expect(res.send).not.toHaveBeenCalled();
           done();
         });
       });
 
       it('and res.removeHeader is present, then header is removed', (done) => {
-        const middlewareWithConfig = expresStatusMonitor({
-          iframe: true,
+        const middlewareWithConfig = expressStatusMonitor({
+          iframe: true
         });
         const resWithHeaders = Object.assign({}, res);
+
         resWithHeaders.headers = {
-          'X-Frame-Options': 1,
+          'X-Frame-Options': 1
         };
-        resWithHeaders.removeHeader = sinon.stub();
+
+        resWithHeaders.removeHeader = jest.fn();
 
         middlewareWithConfig(req, resWithHeaders, next);
         setTimeout(() => {
-          sinon.assert.called(resWithHeaders.removeHeader);
+          expect(resWithHeaders.removeHeader).toHaveBeenCalled();
 
           resWithHeaders.removeHeader = undefined;
-          resWithHeaders.remove = sinon.stub();
+          resWithHeaders.remove = jest.fn();
           middlewareWithConfig(req, resWithHeaders, next);
           setTimeout(() => {
-            sinon.assert.called(resWithHeaders.remove);
+            expect(resWithHeaders.remove).toHaveBeenCalled();
             done();
           });
         });
       });
+    });
 
-      describe('and used as separate middleware and page handler', () => {
-        it('exposes a page handler', (done) => {
-          middleware.pageRoute.should.be.an.instanceof(Function);
-          middleware.pageRoute(req, res, next);
-          setTimeout(() => {
-            sinon.assert.called(res.send);
-            done();
-          });
+    describe('and used as separate middleware and page handler', () => {
+      it('exposes a page handler', (done) => {
+        expect(typeof middleware.pageRoute).toBe('function');
+        middleware.pageRoute(req, res, next);
+        setTimeout(() => {
+          expect(res.send).toHaveBeenCalled();
+          done();
         });
       });
     });

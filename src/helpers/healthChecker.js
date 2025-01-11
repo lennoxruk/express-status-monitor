@@ -3,7 +3,7 @@
 /**
  * Status monitor health checker
  *
- * @module expressStatusMonitor/healthChecker
+ * @module healthChecker
  */
 
 const fetch = require('node-fetch-native');
