@@ -1,12 +1,22 @@
-/* eslint strict: "off", init-declarations: "off" */
-
 'use strict';
+
+/**
+ * Initializes socket.io with the provided Express server and configuration
+ *
+ * @module expressStatusMonitor/socketIOInit
+ */
 
 const socketIo = require('socket.io');
 const gatherOsMetrics = require('./gatherOSMetrics');
 
 let io;
 
+/**
+ * Adds socket event listeners for emitting and handling 'esm_start' and 'esm_change' events
+ *
+ * @param {object} socket - The socket instance to add events to
+ * @param {object} config - Configuration object containing spans for the 'esm_start' event
+ */
 const addSocketEvents = (socket, config) => {
   socket.emit('esm_start', config.spans);
   socket.on('esm_change', () => {
@@ -14,6 +24,14 @@ const addSocketEvents = (socket, config) => {
   });
 };
 
+/**
+ * Initializes socket.io with the provided Express server and configuration
+ *
+ * @param {object} server - The Express server to attach to
+ * @param {object} config - The configuration object containing spans, authorization function, and websocket server
+ *
+ * @returns {undefined}
+ */
 module.exports = (server, config) => {
   if (io === null || io === undefined) {
     if (config.websocket !== null) {
@@ -22,11 +40,11 @@ module.exports = (server, config) => {
       io = socketIo(server);
     }
 
-    io.on('connection', socket => {
+    io.on('connection', (socket) => {
       if (config.authorize) {
         config
           .authorize(socket)
-          .then(authorized => {
+          .then((authorized) => {
             if (!authorized) socket.disconnect('unauthorized');
             else addSocketEvents(socket, config);
           })
@@ -36,10 +54,13 @@ module.exports = (server, config) => {
       }
     });
 
-    config.spans.forEach(span => {
+    config.spans.forEach((span) => {
       span.os = [];
       span.responses = [];
-      const interval = setInterval(() => gatherOsMetrics(io, span), span.interval * 1000);
+      const interval = setInterval(
+        () => gatherOsMetrics(io, span),
+        span.interval * 1000
+      );
 
       // Don't keep Node.js process up
       interval.unref();
