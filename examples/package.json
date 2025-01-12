@@ -16,6 +16,7 @@
     "@lennoxruk/express-status-monitor": "file:..",
     "express": "4.21.2",
     "express-favicon-short-circuit": "1.2.0",
+    "node-fetch-native": "^1.6.4",
     "socket.io": "^4.8.1"
   },
   "scripts": {
