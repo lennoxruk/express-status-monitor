@@ -7,7 +7,7 @@ Simple, self-hosted module based on Socket.io and Chart.js to report realtime se
 
 ## Independent fork notice
 
-This is an independent fork of [express-status-monitor](https://github.com/RafalWilinski/express-status-monitor) with a number of updates. It is detached from the original project as the updates have divulged somewhat from the original. The original structure of the project is still maintained but all source files have been refactored.
+This is an independent fork of [express-status-monitor](https://github.com/RafalWilinski/express-status-monitor) with a number of updates. It is detached from the original project as the update has divulged somewhat from the original source. The original structure of the project is still maintained but all source files have been refactored.
 
 Notable changes:
 
@@ -16,6 +16,7 @@ Notable changes:
 * Changed health checker to use node-fetch-native instead of axios
 * Fixed issue with health checker for non-200 status code responses
 * Fixed event loop showing when set to false in config
+* Removed event loop warning on startup when not requested not in config
 * Removed branding from UI
 * Changed all unit tests to jest
 

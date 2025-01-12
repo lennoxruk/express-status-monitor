@@ -21,6 +21,16 @@ app.use(
     // Pass socket.io instance port down to config.
     // Use only if you're passing your own instance.
     // port: socketIoPort,
+    chartVisibility: {
+      cpu: true,
+      mem: true,
+      load: true,
+      heap: true,
+      eventLoop: true,
+      responseTime: true,
+      rps: true,
+      statusCodes: true
+    },
     healthChecks: [
       {
         protocol: 'http',

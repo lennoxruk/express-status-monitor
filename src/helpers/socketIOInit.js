@@ -33,6 +33,8 @@ const addSocketEvents = (socket, config) => {
  * @returns {undefined}
  */
 module.exports = (server, config) => {
+  gatherOsMetrics.setup(config?.chartVisibility?.eventLoop ?? false);
+
   if (io === null || io === undefined) {
     if (config.websocket !== null) {
       io = config.websocket;
@@ -58,7 +60,7 @@ module.exports = (server, config) => {
       span.os = [];
       span.responses = [];
       const interval = setInterval(
-        () => gatherOsMetrics(io, span),
+        () => gatherOsMetrics.gather(io, span),
         span.interval * 1000
       );
 

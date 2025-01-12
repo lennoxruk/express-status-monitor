@@ -13,11 +13,28 @@ const sendMetrics = require('./sendMetrics');
 
 let eventLoopStats;
 
-try {
-  eventLoopStats = require('event-loop-stats');
-} catch {
-  console.warn('event-loop-stats not found, ignoring event loop metrics...');
-}
+/**
+ * Sets up the event loop stats module. If the module is not available or
+ * requireEventLoopStats is false, it sets the eventLoopStats variable to null.
+ *
+ * @param {boolean} requireEventLoopStats - Whether the event loops stats is required
+ */
+module.exports.setup = (requireEventLoopStats) => {
+  if (eventLoopStats || eventLoopStats === null) return;
+
+  if (requireEventLoopStats) {
+    try {
+      eventLoopStats = require('event-loop-stats');
+      return;
+    } catch {
+      console.warn(
+        'event-loop-stats not found, ignoring event loop metrics...'
+      );
+    }
+  }
+
+  eventLoopStats = null;
+};
 
 /**
  * Gathers OS metrics and sends them to the connected clients using socket.io
@@ -25,7 +42,7 @@ try {
  * @param {object} io - Socket.io instance
  * @param {object} span - Span object
  */
-module.exports = (io, span) => {
+module.exports.gather = (io, span) => {
   const defaultResponse = {
     2: 0,
     3: 0,
