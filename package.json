@@ -1,7 +1,7 @@
 {
   "name": "@lennoxruk/express-status-monitor",
   "version": "1.0.1",
-  "description": "Realtime Monitoring for Express-based Node applications - updated fork of express-status-monitor",
+  "description": "Realtime Monitoring for Express-based Node applications - modified fork of express-status-monitor@RafalWilinski",
   "keywords": [
     "node",
     "status",

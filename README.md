@@ -1,17 +1,23 @@
-# express-status-monitor
+# @lennoxruk/express-status-monitor
 
-[![express-status-monitor on npm](https://img.shields.io/npm/v/express-status-monitor.svg)](https://www.npmjs.com/express-status-monitor)
-[![npm](https://img.shields.io/npm/dt/express-status-monitor.svg)](https://img.shields.io/npm/dt/express-status-monitor.svg)
-[![CircleCI](https://img.shields.io/circleci/project/github/RafalWilinski/express-status-monitor/master.svg)](https://circleci.com/gh/RafalWilinski/express-status-monitor)
-[![Open Source Helpers](https://www.codetriage.com/rafalwilinski/express-status-monitor/badges/users.svg)](https://www.codetriage.com/rafalwilinski/express-status-monitor)
+![NPM Version](https://img.shields.io/npm/v/%40lennoxruk%2Fexpress-status-monitor)
+![NPM Downloads](https://img.shields.io/npm/dw/%40lennoxruk%2Fexpress-status-monitor)
 
 Simple, self-hosted module based on Socket.io and Chart.js to report realtime server metrics for Express-based node servers.
 
-![Monitoring Page](http://i.imgur.com/AHizEWq.gif "Monitoring Page")
+## Independent fork notice
 
-## Demo
+This is an independent fork of [express-status-monitor](https://github.com/RafalWilinski/express-status-monitor) with a number of updates. It is detached from the original project as the updates have divulged somewhat from the original. The original structure of the project is still maintained but all source files have been refactored.
 
-[Demo available here](https://hackathon-starter.walcony.com/status)
+Notable changes:
+
+* All security vulnerabilities in package dependencies have been fixed
+* Replaced axios with node-fetch-native for commonjs compatibility with packaging tools
+* Changed health checker to use node-fetch-native instead of axios
+* Fixed issue with health checker for non-200 status code responses
+* Fixed event loop showing when set to false in config
+* Removed branding from UI
+* Changed all unit tests to jest
 
 ## Support for other Node.js frameworks
 
@@ -20,25 +26,30 @@ Simple, self-hosted module based on Socket.io and Chart.js to report realtime se
 
 ## Installation & setup
 
-1. Run `npm install express-status-monitor --save`
+1. Run `npm install @lennoxruk/express-status-monitor --save`
 2. Before any other middleware or router add following line:
-`app.use(require('express-status-monitor')());`
+`app.use(require('@lennoxruk/express-status-monitor')());`
 3. Run server and go to `/status`
 
 Note: This plugin works on Node versions > 4.x
 
 ## Run examples
 
-1. Go to `cd examples/`
-2. Run `npm i`
-3. Run server `npm start`
-4. Go to `http://0.0.0.0:3000`
+1. Run `npm run example`
+1. Go to UI at `http://0.0.0.0:3000`
+
+To run status code tester, whilst example is running,
+
+1. Go to examples folder `cd examples`
+2. Run `node tester.js`
+3. View UI for status code updates at random intervals
 
 ## Options
 
 Monitor can be configured by passing options object into `expressMonitor` constructor.
 
 Default config:
+
 ```javascript
 title: 'Express Status',  // Default title
 theme: 'default.css',     // Default styles
@@ -67,7 +78,6 @@ chartVisibility: {
 },
 healthChecks: [],
 ignoreStartsWith: '/admin'
-
 ```
 
 ## Health Checks
@@ -97,7 +107,8 @@ The HTML page handler is exposed as a `pageRoute` property on the main
 middleware function.  So the middleware is mounted to intercept all requests
 while the HTML page handler will be authenticated.
 
-Example using https://www.npmjs.com/package/connect-ensure-login
+Example using <https://www.npmjs.com/package/connect-ensure-login>
+
 ```javascript
 const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn()
 
@@ -109,6 +120,7 @@ app.get('/status', ensureLoggedIn, statusMonitor.pageRoute)
 Credits to [@mattiaerre](https://github.com/mattiaerre)
 
 Example using [http-auth](https://www.npmjs.com/package/http-auth)
+
 ```javascript
 const auth = require('http-auth');
 const basic = auth.basic({realm: 'Monitor Area'}, function(user, pass, callback) {
@@ -128,11 +140,12 @@ If you're using socket.io in your project, this module could break your project 
 ## Tests and coverage
 
 In order to run test and coverage use the following npm commands:
-```
+
+```bash
 npm test
 npm run coverage
 ```
 
 ## License
 
-[MIT License](https://opensource.org/licenses/MIT) © [Dynobase](https://dynobase.com)
+[MIT License](https://opensource.org/licenses/MIT)
