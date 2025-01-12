@@ -5,15 +5,15 @@
 /**
  * Express status monitor middleware wrapper
  *
- * Adapted version of package @ncanis/express-status-monitor
+ * Adapted version of package express-status-monitor
  * merged into application
  *
  * Alterations:
  *
- * Replaced axios with node-fetch for commonjs compatibility with @yao-pkg/pkg\
+ * Replaced axios with node-fetch for commonjs compatibility with packaging tools like pkg\
+ * Changed health checker to use node-fetch-native instead of axios\
  * Fixed issue with health checker for non-200 status code responses\
- * Changed health checker to use async/await instead of promises\
- * Minor cosmetic UI changes
+ * Removed branding from UI
  *
  * @module expressStatusMonitor
  */

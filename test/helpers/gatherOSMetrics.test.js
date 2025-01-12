@@ -6,9 +6,7 @@ const v8 = require('v8');
 const sendMetrics = require('../../src/helpers/sendMetrics');
 
 jest.mock('pidusage');
-jest.mock(
-  '../../src/helpers/sendMetrics'
-);
+jest.mock('../../src/helpers/sendMetrics');
 
 describe('gatherOsMetrics', () => {
   it('should call pidusage with the correct pid', () => {

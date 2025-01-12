@@ -1,7 +1,6 @@
 'use strict';
 
-const healthCheckerPath =
-  '../../src/helpers/healthChecker';
+const healthCheckerPath = '../../src/helpers/healthChecker';
 
 describe('healthChecker', () => {
   beforeEach(() => {

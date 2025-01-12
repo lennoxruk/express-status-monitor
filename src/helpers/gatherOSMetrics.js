@@ -15,7 +15,7 @@ let eventLoopStats;
 
 try {
   eventLoopStats = require('event-loop-stats');
-} catch (error) {
+} catch {
   console.warn('event-loop-stats not found, ignoring event loop metrics...');
 }
 

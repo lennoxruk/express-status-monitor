@@ -4,7 +4,7 @@ const socketIoPort = 2222;
 const express = require('express');
 
 // This is optional. If your server uses socket.io already, pass it to config as `webserver` along with it's port.
-const socketio = require('socket.io')(socketIoPort);
+require('socket.io')(socketIoPort);
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -27,23 +27,23 @@ app.use(
         host: 'localhost',
         port: 3000,
         path: '/admin/health/ex1',
-        headers: {},
+        headers: {}
       },
       {
         protocol: 'http',
         host: 'localhost',
         port: 3000,
         path: '/return-status/200',
-        headers: {},
-      },
-    ],
-  }),
+        headers: {}
+      }
+    ]
+  })
 );
 app.use(require('express-favicon-short-circuit'));
 
 // Example route throwing requested status code
 app.get('/return-status/:statusCode', (req, res) =>
-  res.sendStatus(req.params.statusCode),
+  res.sendStatus(req.params.statusCode)
 );
 
 app.listen(port, () => {
