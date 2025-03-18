@@ -16,7 +16,7 @@ Notable changes:
 * Changed health checker to use node-fetch-native instead of axios
 * Fixed issue with health checker for non-200 status code responses
 * Fixed event loop showing when set to false in config
-* Removed event loop warning on startup when not requested not in config
+* Removed event loop warning on startup when not requested in config
 * Removed branding from UI
 * Changed all unit tests to jest
 

@@ -13,7 +13,7 @@ describe('gatherOsMetrics', () => {
     const io = {};
     const span = {};
 
-    gatherOSMetrics(io, span);
+    gatherOSMetrics.gather(io, span);
 
     expect(pidusage).toHaveBeenCalledTimes(1);
     expect(pidusage).toHaveBeenCalledWith(process.pid, expect.any(Function));
@@ -28,7 +28,7 @@ describe('gatherOsMetrics', () => {
       callback(error);
     });
 
-    gatherOSMetrics(io, span);
+    gatherOSMetrics.gather(io, span);
 
     expect(sendMetrics).not.toHaveBeenCalled();
   });
@@ -52,7 +52,7 @@ describe('gatherOsMetrics', () => {
       callback(null, stat);
     });
 
-    gatherOSMetrics(io, span);
+    gatherOSMetrics.gather(io, span);
 
     expect(sendMetrics).toHaveBeenCalledTimes(1);
     expect(sendMetrics).toHaveBeenCalledWith(io, span);
@@ -95,7 +95,7 @@ describe('gatherOsMetrics', () => {
       // ignore
     }
 
-    gatherOSMetrics(io, span);
+    gatherOSMetrics.gather(io, span);
 
     expect(sendMetrics).toHaveBeenCalled();
     expect(sendMetrics).toHaveBeenCalledWith(io, span);
