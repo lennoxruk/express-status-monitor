@@ -11,7 +11,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/lennoxruk/express-status-monitor.git"
+    "url": "git+https://github.com/lennoxruk/express-status-monitor.git"
   },
   "license": "MIT",
   "author": "lennoxruk",
